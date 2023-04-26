@@ -1,0 +1,55 @@
+* {
+  background-color: rgb(236, 238, 240);
+}
+
+nav {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+}
+
+#link {
+  margin: 10px;
+  background-color: transparent;
+  justify-content: space-around;
+}
+
+#link:link,
+#link:visited {
+  text-decoration: none;
+  color: aliceblue;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: hsl(196, 67%, 24%);
+}
+
+#title {
+  background-color: transparent;
+  color: aliceblue;
+  margin: 10px;
+  font-size: 25px;
+}
+
+#post-container {
+  border: 1px solid grey;
+  box-shadow: 5px 5px 5px;
+  padding: 10px;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+#post-text {
+  background-color: transparent;
+}
+
+#post-title {
+  text-align: center;
+}
+
+b {
+  background-color: transparent;
+}
