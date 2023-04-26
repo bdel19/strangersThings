@@ -1,7 +1,10 @@
 import React from "react";
 import { deletePost } from "../api";
+import { useNavigate } from "react-router-dom";
 
-const Posts = ({ posts, token, getPosts, isLoggedIn }) => {
+const Posts = ({ posts, token, getPosts, isLoggedIn, setPost }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <h1 id="post-title">The Things</h1>
@@ -42,7 +45,14 @@ const Posts = ({ posts, token, getPosts, isLoggedIn }) => {
                 <button>Edit</button>
               </>
             ) : isLoggedIn ? (
-              <button>Send Message</button>
+              <button
+                onClick={() => {
+                  setPost(post);
+                  navigate(`/posts/${post._id}`);
+                }}
+              >
+                Send Message
+              </button>
             ) : null}
           </div>
         );

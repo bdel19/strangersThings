@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import { Posts, Register, Login, Logout, MakePost } from "./";
-import { fetchPosts } from "../api";
+import { Posts, Register, Login, Logout, MakePost, Message } from "./";
+import { fetchPosts, myData } from "../api";
 
 const App = () => {
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [post, setPost] = useState("");
 
   // console.log("TOKEN", token);
 
@@ -23,7 +24,11 @@ const App = () => {
   const getPosts = async () => {
     const result = await fetchPosts(token);
     setPosts(result);
-    console.log("POSTS UseEffect", result);
+    // console.log("POSTS UseEffect", result);
+  };
+
+  const getMyData = async () => {
+    await myData(token);
   };
 
   const Navigation = () => {
@@ -69,10 +74,13 @@ const App = () => {
 
   /////////////////////////////////////////////////
   useEffect(() => {
-    console.log("LOGGED IN?", isLoggedIn);
+    // console.log("LOGGED IN?", isLoggedIn);
     getToken();
     console.log("LOGGED IN?", isLoggedIn);
     getPosts();
+    {
+      isLoggedIn ? getMyData() : null;
+    }
   }, [token]);
   /////////////////////////////////////////////////
 
@@ -90,6 +98,7 @@ const App = () => {
                 token={token}
                 getPosts={getPosts}
                 isLoggedIn={isLoggedIn}
+                setPost={setPost}
               />
             }
           />
@@ -117,6 +126,11 @@ const App = () => {
             exact
             path="/makepost"
             element={<MakePost token={token} getPosts={getPosts} />}
+          />
+          <Route
+            exact
+            path={`/posts/${post._id}`}
+            element={<Message post={post} token={token} />}
           />
         </Routes>
       </div>

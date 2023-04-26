@@ -29,6 +29,7 @@ Authenticated post view
 
   -message
     -header, post id, token, message content
+    -onClick, new page, with selected post rendered and input for message
   
   -update post
     -token, post id, method

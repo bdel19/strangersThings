@@ -61,6 +61,21 @@ export const login = async (user) => {
   }
 };
 
+export const myData = async (token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log("myData Result", result);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const makePost = async (post, token) => {
   try {
     const response = await fetch(`${BASE_URL}/posts`, {
@@ -92,6 +107,27 @@ export const deletePost = async (postID, token) => {
     });
     const result = await response.json();
     console.log("deletePost result", result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const postMessage = async (postID, token, message) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postID}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message,
+      }),
+    });
+    const result = await response.json();
+    console.log("postMessage Result", result);
+    console.log("postMessage Token", token);
     return result;
   } catch (err) {
     console.error(err);
