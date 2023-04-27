@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const Message = ({ post, token }) => {
   const navigate = useNavigate();
-  const [content, setContent] = useState({});
+  const [content, setContent] = useState("");
   const message = { content };
+
   return (
     <div key={post._id} id="post-container">
       <h2 id="post-text">{post.title}</h2>

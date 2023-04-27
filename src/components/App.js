@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import { Posts, Register, Login, Logout, MakePost, Message } from "./";
+import { Posts, Register, Login, Logout, MakePost, Message, Profile } from "./";
 import { fetchPosts, myData } from "../api";
 
 const App = () => {
@@ -8,6 +8,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [post, setPost] = useState("");
+  const [userData, setUserData] = useState({});
 
   // console.log("TOKEN", token);
 
@@ -28,7 +29,12 @@ const App = () => {
   };
 
   const getMyData = async () => {
-    await myData(token);
+    const result = await myData(token);
+    setUserData(result.data);
+  };
+
+  const updatePost = async () => {
+    const result = await updatePost();
   };
 
   const Navigation = () => {
@@ -37,11 +43,14 @@ const App = () => {
         <p id="title">Stranger's Things</p>
         <nav>
           <Link id="link" to="/">
-            Home
+            Posts
           </Link>
           {/* <Link id='link' to="/posts">Posts</Link> */}
           {token ? (
             <>
+              <Link id="link" to="/profile">
+                My Profile
+              </Link>
               <Link
                 id="link"
                 to="/logout"
@@ -79,7 +88,7 @@ const App = () => {
     console.log("LOGGED IN?", isLoggedIn);
     getPosts();
     {
-      isLoggedIn ? getMyData() : null;
+      isLoggedIn ? getMyData() : console.log("getMyData Failed");
     }
   }, [token]);
   /////////////////////////////////////////////////
@@ -129,8 +138,13 @@ const App = () => {
           />
           <Route
             exact
-            path={`/posts/${post._id}`}
+            path={`/posts/:postID`}
             element={<Message post={post} token={token} />}
+          />
+          <Route
+            exact
+            path={"/profile"}
+            element={<Profile userData={userData} />}
           />
         </Routes>
       </div>

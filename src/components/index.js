@@ -5,3 +5,4 @@ export { default as Login } from "./Login";
 export { default as Logout } from "./Logout";
 export { default as MakePost } from "./makePost";
 export { default as Message } from "./Message";
+export { default as Profile } from "./Profile";

@@ -1,16 +1,17 @@
 import React from "react";
 import { deletePost } from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Posts = ({ posts, token, getPosts, isLoggedIn, setPost }) => {
   const navigate = useNavigate();
-
+  let { postID } = useParams();
   return (
     <>
       <h1 id="post-title">The Things</h1>
       {posts.map((post) => {
         // console.log("POST", post);
         // console.log(post.isAuthor);
+        // let postID = post._id;
         return (
           <div key={post._id} id="post-container">
             <h2 id="post-text">{post.title}</h2>
@@ -47,8 +48,9 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost }) => {
             ) : isLoggedIn ? (
               <button
                 onClick={() => {
+                  let postID = post._id;
                   setPost(post);
-                  navigate(`/posts/${post._id}`);
+                  navigate(`/posts/${postID}`);
                 }}
               >
                 Send Message

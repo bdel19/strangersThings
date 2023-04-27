@@ -71,6 +71,7 @@ export const myData = async (token) => {
     });
     const result = await response.json();
     console.log("myData Result", result);
+    return result;
   } catch (err) {
     console.error(err);
   }
@@ -107,6 +108,32 @@ export const deletePost = async (postID, token) => {
     });
     const result = await response.json();
     console.log("deletePost result", result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updatePost = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title: randomThing,
+          description: randomThing,
+          price: randomThing,
+          location: randomThing,
+          willDeliver: randomThing,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log("updatePost result", result);
     return result;
   } catch (err) {
     console.error(err);
