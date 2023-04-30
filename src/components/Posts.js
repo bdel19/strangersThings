@@ -47,6 +47,7 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
                   onClick={() => {
                     postID = post._id;
                     setPost(post);
+                    setPostId(post._id);
                     // console.log("edit onClick post", post);
                     navigate(`/updatepost/${postID}`);
                   }}
@@ -60,7 +61,7 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
                   // let { postID } = useParams();
                   postID = post._id;
                   setPost(post);
-                  setPostId(post._id);
+
                   navigate(`/posts/${postID}`);
                 }}
               >

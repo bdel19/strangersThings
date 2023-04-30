@@ -9,6 +9,7 @@ import {
   Message,
   Profile,
   UpdatePost,
+  SearchBar,
 } from "./";
 import { fetchPosts, myData, updatePost } from "../api";
 
@@ -45,14 +46,14 @@ const App = () => {
     setUserData(result.data);
   };
 
-  const updatingPost = async () => {
-    console.log("updatingPost", updatedPost);
-    const result = await updatePost(postId, token, updatedPost);
-    if (result.success) {
-      // getPosts();
-      navigate("/");
-    }
-  };
+  // const updatingPost = async () => {
+  //   console.log("updatingPost", updatedPost);
+  //   const result = await updatePost(postId, token, updatedPost);
+  //   if (result.success) {
+  //     getPosts();
+  //     navigate("/");
+  //   }
+  // };
 
   const Navigation = () => {
     return (
@@ -94,6 +95,7 @@ const App = () => {
             </>
           )}
         </nav>
+        <SearchBar posts={posts} />
       </header>
     );
   };
@@ -166,13 +168,13 @@ const App = () => {
           />
           <Route
             exact
-            path={`updatepost/:postID`}
+            path={`/updatepost/:postID`}
             element={
               <UpdatePost
                 token={token}
                 post={post}
                 setUpdatedPost={setUpdatedPost}
-                updatingPost={updatingPost}
+                // updatingPost={updatingPost}
                 getPosts={getPosts}
                 setPostId={setPostId}
               />

@@ -77,7 +77,14 @@ import { updatePost } from "../api";
 //   );
 // }
 
-const UpdatePost = ({ setUpdatedPost, post, updatingPost, setPostId }) => {
+const UpdatePost = ({
+  setUpdatedPost,
+  post,
+  updatingPost,
+  setPostId,
+  token,
+  getPosts,
+}) => {
   const { title, description, price, location, willDeliver } = post;
   console.log("Old Post", post);
   const navigate = useNavigate();
@@ -92,18 +99,33 @@ const UpdatePost = ({ setUpdatedPost, post, updatingPost, setPostId }) => {
     event.preventDefault();
 
     const newPost = {
-      newTitle,
-      newDescription,
-      newPrice,
-      newLocation,
-      newWillDeliver,
+      title: newTitle,
+      description: newDescription,
+      price: newPrice,
+      location: newLocation,
+      willDeliver: newWillDeliver,
     };
 
-    console.log(newPrice);
-    setUpdatedPost(newPost);
-    console.log("UpdatePost", newPost);
-    updatingPost();
+    // console.log(newPrice);
+    // setUpdatedPost(newPost);
+    // console.log("UpdatePost", newPost);
+    // updatingPost();
+
+    const result = await updatePost(post._id, token, newPost);
+    if (result.success) {
+      getPosts();
+      navigate("/");
+    }
   };
+
+  // const updatingPost = async () => {
+  //   console.log("updatingPost", updatedPost);
+  //   const result = await updatePost(postId, token, updatedPost);
+  //   if (result.success) {
+  //     getPosts();
+  //     navigate("/");
+  //   }
+  // };
 
   return (
     <form onSubmit={handleSubmit} id="updatePostForm">
