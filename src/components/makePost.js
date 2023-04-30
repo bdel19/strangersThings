@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { makePost } from "../api";
 import { useNavigate } from "react-router-dom";
 
-// import { getPosts } from "./App";
-
 const MakePost = ({ token, getPosts }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -14,6 +12,7 @@ const MakePost = ({ token, getPosts }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const post = { title, description, price, willDeliver };
     const result = await makePost(post, token);
     console.log("makePost Result", result);

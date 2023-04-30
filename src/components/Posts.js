@@ -2,7 +2,7 @@ import React from "react";
 import { deletePost } from "../api";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Posts = ({ posts, token, getPosts, isLoggedIn, setPost }) => {
+const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
   const navigate = useNavigate();
   let { postID } = useParams();
   return (
@@ -43,13 +43,24 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost }) => {
                 >
                   Delete
                 </button>
-                <button>Edit</button>
+                <button
+                  onClick={() => {
+                    postID = post._id;
+                    setPost(post);
+                    // console.log("edit onClick post", post);
+                    navigate(`/updatepost/${postID}`);
+                  }}
+                >
+                  Edit
+                </button>
               </>
             ) : isLoggedIn ? (
               <button
                 onClick={() => {
-                  let postID = post._id;
+                  // let { postID } = useParams();
+                  postID = post._id;
                   setPost(post);
+                  setPostId(post._id);
                   navigate(`/posts/${postID}`);
                 }}
               >

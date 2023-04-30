@@ -23,9 +23,6 @@ const Profile = ({ userData }) => {
                       <b>Price:</b> {post.price}
                     </p>
                     <p id="post-text">
-                      <b>The Stranger:</b> {post.author.username}
-                    </p>
-                    <p id="post-text">
                       <b>Location:</b> {post.location}
                     </p>
                     <p id="post-text">
@@ -35,7 +32,7 @@ const Profile = ({ userData }) => {
                     {post.messages
                       ? post.messages.map((message) => {
                           return (
-                            <div key={post._id}>
+                            <div key={message._id}>
                               <p id="post-text">
                                 <b>Message:</b> {message.content}
                               </p>

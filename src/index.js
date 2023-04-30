@@ -10,33 +10,12 @@ api folder for all api calls?
 password
   -set minimum un and pw length, set required, display error message, show minimum requirements
 
-makeHeaders? 
-
 login
   -send message if incorrect information is put in(login result, error.message)
-
-Authenticated post view
-  -pulling only own posts - My Posts? 
-    -<Fragment> {post.isAuthor ? null : render post} </>
-    -delete button
-    -messages
-    -exclude posts where isAuthor = false
-    -myData()
-    -isLoggedIn useState
- 
-  -delete, update post, message 
-    - onClick, set postId 
-
-  -message
-    -header, post id, token, message content
-    -onClick, new page, with selected post rendered and input for message
-    *****message shows [object Object]
   
   -update post
     -token, post id, method
-  
-Loading user object
-  -token check, useEffect
+
 
 Search Form
   -searchTerm useState

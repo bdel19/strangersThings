@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import { Posts, Register, Login, Logout, MakePost, Message, Profile } from "./";
-import { fetchPosts, myData } from "../api";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Posts,
+  Register,
+  Login,
+  Logout,
+  MakePost,
+  Message,
+  Profile,
+  UpdatePost,
+} from "./";
+import { fetchPosts, myData, updatePost } from "../api";
 
 const App = () => {
   const [token, setToken] = useState("");
@@ -9,6 +18,9 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [post, setPost] = useState("");
   const [userData, setUserData] = useState({});
+  const [updatedPost, setUpdatedPost] = useState({});
+  const [postId, setPostId] = useState("");
+  const navigate = useNavigate();
 
   // console.log("TOKEN", token);
 
@@ -33,8 +45,13 @@ const App = () => {
     setUserData(result.data);
   };
 
-  const updatePost = async () => {
-    const result = await updatePost();
+  const updatingPost = async () => {
+    console.log("updatingPost", updatedPost);
+    const result = await updatePost(postId, token, updatedPost);
+    if (result.success) {
+      // getPosts();
+      navigate("/");
+    }
   };
 
   const Navigation = () => {
@@ -108,6 +125,7 @@ const App = () => {
                 getPosts={getPosts}
                 isLoggedIn={isLoggedIn}
                 setPost={setPost}
+                setPostId={setPostId}
               />
             }
           />
@@ -145,6 +163,20 @@ const App = () => {
             exact
             path={"/profile"}
             element={<Profile userData={userData} />}
+          />
+          <Route
+            exact
+            path={`updatepost/:postID`}
+            element={
+              <UpdatePost
+                token={token}
+                post={post}
+                setUpdatedPost={setUpdatedPost}
+                updatingPost={updatingPost}
+                getPosts={getPosts}
+                setPostId={setPostId}
+              />
+            }
           />
         </Routes>
       </div>

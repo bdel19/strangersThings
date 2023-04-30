@@ -114,25 +114,23 @@ export const deletePost = async (postID, token) => {
   }
 };
 
-export const updatePost = async () => {
+export const updatePost = async (postId, token, updatedPost) => {
+  console.log("updatePost postID", postId);
+  console.log("updatePost token", token);
+  console.log("updatePost updatedPost", updatedPost);
   try {
-    const response = await fetch(`${BASE_URL}/posts/${postID}`, {
+    const response = await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        post: {
-          title: randomThing,
-          description: randomThing,
-          price: randomThing,
-          location: randomThing,
-          willDeliver: randomThing,
-        },
+        updatedPost,
       }),
     });
     const result = await response.json();
+
     console.log("updatePost result", result);
     return result;
   } catch (err) {

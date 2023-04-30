@@ -15,7 +15,7 @@ const Message = ({ post, token }) => {
         <b>Price:</b> {post.price}
       </p>
       <p id="post-text">
-        <b>The Stranger:</b> {post.author.username}
+        <b>The Stranger:</b> {post.author && post.author.username}
       </p>
       <p id="post-text">
         <b>Location:</b> {post.location}
