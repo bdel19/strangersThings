@@ -10,6 +10,7 @@ import {
   Profile,
   UpdatePost,
   SearchBar,
+  SearchResult,
 } from "./";
 import { fetchPosts, myData, updatePost } from "../api";
 
@@ -22,38 +23,25 @@ const App = () => {
   const [updatedPost, setUpdatedPost] = useState({});
   const [postId, setPostId] = useState("");
   const navigate = useNavigate();
-
-  // console.log("TOKEN", token);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getToken = () => {
-    // console.log("PRE-getToken", token);
     {
       window.localStorage.getItem("token")
         ? (setToken(window.localStorage.getItem("token")), setIsLoggedIn(true))
         : null;
     }
-    // console.log("POST getToken", token);
   };
 
   const getPosts = async () => {
     const result = await fetchPosts(token);
     setPosts(result);
-    // console.log("POSTS UseEffect", result);
   };
 
   const getMyData = async () => {
     const result = await myData(token);
     setUserData(result.data);
   };
-
-  // const updatingPost = async () => {
-  //   console.log("updatingPost", updatedPost);
-  //   const result = await updatePost(postId, token, updatedPost);
-  //   if (result.success) {
-  //     getPosts();
-  //     navigate("/");
-  //   }
-  // };
 
   const Navigation = () => {
     return (
@@ -95,16 +83,14 @@ const App = () => {
             </>
           )}
         </nav>
-        <SearchBar posts={posts} />
+        <SearchBar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       </header>
     );
   };
 
   /////////////////////////////////////////////////
   useEffect(() => {
-    // console.log("LOGGED IN?", isLoggedIn);
     getToken();
-    console.log("LOGGED IN?", isLoggedIn);
     getPosts();
     {
       isLoggedIn ? getMyData() : console.log("getMyData Failed");
@@ -131,7 +117,6 @@ const App = () => {
               />
             }
           />
-          {/* <Route exact path="/posts" element={<Posts />} /> */}
           <Route
             exact
             path="/register"
@@ -174,9 +159,23 @@ const App = () => {
                 token={token}
                 post={post}
                 setUpdatedPost={setUpdatedPost}
-                // updatingPost={updatingPost}
                 getPosts={getPosts}
                 setPostId={setPostId}
+              />
+            }
+          />
+          <Route
+            exact
+            path={"/searchresult"}
+            element={
+              <SearchResult
+                posts={posts}
+                searchTerm={searchTerm}
+                isLoggedIn={isLoggedIn}
+                setPostId={setPostId}
+                token={token}
+                getPosts={getPosts}
+                setPost={setPost}
               />
             }
           />

@@ -11,18 +11,8 @@ const Login = ({ setToken, setIsLoggedIn }) => {
     event.preventDefault();
     const user = { username, password };
     const results = await login(user);
-    // const errorMessage = results.error.message;
-    // {
-    //   results.success
-    //     ? // console.log("Success"),
-    //       (setToken(results.data.token),
-    //       window.localStorage.setItem("token", results.data.token),
-    //       navigate("/home"))
-    //     : console.log("Failure");
-    // }
 
     if (results.success) {
-      console.log("LOGIN RESULTS", results);
       setToken(results.data.token);
       window.localStorage.setItem("token", results.data.token);
       setIsLoggedIn(true);

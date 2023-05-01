@@ -8,22 +8,21 @@ const MakePost = ({ token, getPosts }) => {
   const [price, setPrice] = useState("");
   const [willDeliver, setWillDeliver] = useState(false);
   const navigate = useNavigate();
-  //   const post = { title, description, price, willDeliver };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const post = { title, description, price, willDeliver };
     const result = await makePost(post, token);
-    console.log("makePost Result", result);
     if (result.success) {
       getPosts();
       navigate("/");
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form id="makePost-container" onSubmit={handleSubmit}>
       <input
+        id="makePost-text"
         type="text"
         placeholder="Enter Title"
         value={title}
@@ -31,34 +30,26 @@ const MakePost = ({ token, getPosts }) => {
       />
 
       <input
+        id="makePost-text"
         type="text"
         placeholder="Enter Description"
         value={description}
         onChange={(event) => setDescription(event.target.value)}
       />
       <input
+        id="makePost-text"
         type="text"
         placeholder="Enter Price"
         value={price}
         onChange={(event) => setPrice(event.target.value)}
       />
-      {/* <select
-        type="text"
-        value={willDeliver}
-        onChange={(event) => {
-          setWillDeliver(event.target.value);
-        }}
-      >
-        <option value={"No"}>No</option>
-        <option value={"Yes"}>Yes</option>
-      </select> */}
-      <label htmlFor="accept">
+      <label htmlFor="accept" id="makePost-text">
         Willing to Deliver?
         <input
+          id="makePost-text"
           type="checkbox"
           onChange={(event) => setWillDeliver(event.target.checked)}
         />
-        {/* Willing to Deliver? */}
       </label>
       <button type="submit">Create Post</button>
     </form>

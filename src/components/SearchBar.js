@@ -1,26 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = (posts) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // console.log("SearchBar posts", posts);
-  // {
-  //   posts.map((post) => {
-  //     console.log(post.title);
-  //   });
-  // }
-
+const SearchBar = ({ searchTerm, setSearchTerm }) => {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(searchTerm);
-
-    // {
-    //   posts.filter((post) => {
-    //     const postName = post.title.toLowerCase();
-    //     const included = postName.includes(searchTerm);
-    //   });
-    // }
-    // console.log(included);
+    navigate("/searchresult");
   };
 
   return (
@@ -33,6 +18,7 @@ const SearchBar = (posts) => {
           setSearchTerm(event.target.value);
         }}
       />
+
       <button type="submit">Submit</button>
     </form>
   );
@@ -41,8 +27,5 @@ const SearchBar = (posts) => {
 export default SearchBar;
 
 /*
-  pull in posts
-  create search term useState
-  form with onChange event.target.value to setSearchTerm
-  on submit 
+onChange updates searchTerm, which causes rerender, causing input to lose focus...? 
 */

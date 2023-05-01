@@ -9,9 +9,6 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
     <>
       <h1 id="post-title">The Things</h1>
       {posts.map((post) => {
-        // console.log("POST", post);
-        // console.log(post.isAuthor);
-        // let postID = post._id;
         return (
           <div key={post._id} id="post-container">
             <h2 id="post-text">{post.title}</h2>
@@ -48,7 +45,6 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
                     postID = post._id;
                     setPost(post);
                     setPostId(post._id);
-                    // console.log("edit onClick post", post);
                     navigate(`/updatepost/${postID}`);
                   }}
                 >
@@ -58,7 +54,6 @@ const Posts = ({ posts, token, getPosts, isLoggedIn, setPost, setPostId }) => {
             ) : isLoggedIn ? (
               <button
                 onClick={() => {
-                  // let { postID } = useParams();
                   postID = post._id;
                   setPost(post);
 

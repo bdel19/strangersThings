@@ -1,19 +1,12 @@
 import React from "react";
 
 const Profile = ({ userData }) => {
-  console.log("userData", userData);
   const { messages, posts } = userData;
-  console.log("messages", messages);
-  console.log("posts", posts);
   return (
     <>
       {posts
         ? posts.map((post) => {
             if (post.active === true) {
-              console.log("ACTIVE POST? ", post.active);
-              console.log("Message", post.messages);
-              //   const messages = post.messages;
-              console.log(messages);
               return (
                 <React.Fragment key={post._id}>
                   <div id="post-container">
@@ -32,7 +25,7 @@ const Profile = ({ userData }) => {
                     {post.messages
                       ? post.messages.map((message) => {
                           return (
-                            <div key={message._id}>
+                            <div id="message-container" key={message._id}>
                               <p id="post-text">
                                 <b>Message:</b> {message.content}
                               </p>

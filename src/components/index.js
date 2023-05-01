@@ -8,3 +8,4 @@ export { default as Message } from "./Message";
 export { default as Profile } from "./Profile";
 export { default as UpdatePost } from "./UpdatePost";
 export { default as SearchBar } from "./SearchBar";
+export { default as SearchResult } from "./SearchResult";
